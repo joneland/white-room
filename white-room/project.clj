@@ -6,8 +6,8 @@
                  [ring/ring-json "0.4.0"]
                  [compojure "1.5.1"]]
 
-  :main white-room.handler
-  :aot [white-room.handler]
+  :main white-room.main
+  :aot [white-room.main]
 
   :plugins [[lein-ring "0.9.7"]]  
 
