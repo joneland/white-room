@@ -7,4 +7,6 @@
   
   (testing "endpoint not found"
     (let [response (app (request :get "/dummy-route-that-doesnt-exist"))]
-      (is (= (:status response) 404)))))
+      (is (= 404 (:status response)))
+      (is (= "application/json; charset=utf-8" (get-in response [:headers "Content-Type"])))
+      (is (= "{\"message\":\"Resource not found!\"}" (:body response))))))
