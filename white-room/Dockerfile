@@ -1,4 +1,4 @@
-FROM java:openjdk-8-jre
+FROM anapsix/alpine-java
 COPY target/white-room-0.1-SNAPSHOT-standalone.jar white-room-0.1-SNAPSHOT-standalone.jar
 
 ENV PORT 4000
