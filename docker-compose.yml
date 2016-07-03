@@ -4,3 +4,8 @@ services:
     ports:
     - "4000:4000"
     build: ./app
+
+  stub:
+    ports:
+    - "4001:4001"
+    build: ./stub
