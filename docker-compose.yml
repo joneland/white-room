@@ -1,6 +1,6 @@
 version: '2'
 services:
-  web:
+  app:
     ports:
     - "4000:4000"
-    build: .
+    build: ./app

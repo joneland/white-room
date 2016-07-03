@@ -1,5 +1,5 @@
 FROM anapsix/alpine-java
-COPY target/white-room-*-standalone.jar app.jar
+COPY target/app*standalone.jar app.jar
 
 ENV PORT 4000
 EXPOSE 4000

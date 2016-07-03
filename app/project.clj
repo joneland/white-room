@@ -1,4 +1,4 @@
-(defproject white-room "0.1-SNAPSHOT"
+(defproject white-room/app "0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [http-kit "2.1.19"]
                  [ring/ring-core "1.5.0"]
