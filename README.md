@@ -5,6 +5,7 @@
 Create uberjars for app and stub
 
 `cd <project_root>/app ; lein uberjar`
+
 `cd <project_root>/stub; lein uberjar`
 
 ## Deploy
