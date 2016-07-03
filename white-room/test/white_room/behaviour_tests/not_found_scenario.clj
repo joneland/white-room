@@ -1,4 +1,4 @@
-(ns white-room.not-found-scenario
+(ns white-room.behaviour-tests.not-found-scenario
   (:use clojure.test
    :require [clj-http.client :as client]))
 
