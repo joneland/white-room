@@ -1,7 +1,7 @@
 FROM anapsix/alpine-java
-COPY target/white-room-0.1-SNAPSHOT-standalone.jar white-room-0.1-SNAPSHOT-standalone.jar
+COPY target/white-room-*-standalone.jar app.jar
 
 ENV PORT 4000
 EXPOSE 4000
 
-CMD ["java", "-jar", "white-room-0.1-SNAPSHOT-standalone.jar"]
+CMD ["java", "-jar", "app.jar"]

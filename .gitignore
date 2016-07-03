@@ -1,4 +1,6 @@
 .vagrant
+.idea
+*.iml
 **/target
 **/.lein*
 **/*.swp

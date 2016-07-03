@@ -9,13 +9,15 @@
   :main white-room.main
   :aot [white-room.main]
 
-  :plugins [[lein-ring "0.9.7"]]  
+  :plugins [[lein-ring "0.9.7"]]
 
   :ring {:handler white-room.handler/app}
 
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]]}}
-  
+    {:dev
+      {:dependencies [[javax.servlet/servlet-api "2.5"]
+                      [ring/ring-mock "0.3.0"]
+                      [clj-http "2.2.0"]]}}
+
   :test-selectors {:default (complement :behaviour)
                    :behaviour :behaviour})
