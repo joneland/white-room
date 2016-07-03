@@ -3,7 +3,7 @@
             [white-room.handler :refer [app]])
   (:gen-class))
 
-(def port (Integer/parseInt (or (System/getenv "PORT") "8080")))
+(def port (Integer/parseInt (or (System/getenv "PORT") "4000")))
 
 (defn -main []
   (run-server app {:port port})

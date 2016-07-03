@@ -11,7 +11,8 @@
 
   :plugins [[lein-ring "0.9.7"]]
 
-  :ring {:handler white-room.handler/app}
+  :ring {:handler white-room.handler/app
+         :port 4000}
 
   :profiles
     {:dev
