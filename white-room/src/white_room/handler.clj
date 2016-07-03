@@ -7,9 +7,9 @@
 
 (defroutes app-routes
   (route/not-found
-   (response {:message "Resource not found!"})))
+    (response {:message "Resource not found!"})))
 
 (def app
- (-> app-routes
-     wrap-json-response
-     wrap-json-body))
+  (-> app-routes
+      wrap-json-response
+      wrap-json-body))

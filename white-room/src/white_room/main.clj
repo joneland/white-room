@@ -1,7 +1,7 @@
 (ns white-room.main
+  (:gen-class)
   (:require [org.httpkit.server :refer [run-server]]
-            [white-room.handler :refer [app]])
-  (:gen-class))
+            [white-room.handler :refer [app]]))
 
 (def port (Integer/parseInt (or (System/getenv "PORT") "4000")))
 

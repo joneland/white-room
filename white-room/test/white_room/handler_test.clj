@@ -4,7 +4,7 @@
         white-room.handler))
 
 (deftest endpoints
-  
+
   (testing "endpoint not found"
     (let [response (app (request :get "/dummy-route-that-doesnt-exist"))]
       (is (= 404 (:status response)))
