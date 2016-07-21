@@ -1,0 +1,15 @@
+version: '2'
+services:
+  consul:
+    image: progrium/consul
+    command: -server -bootstrap
+    container_name: 'consul'
+    ports:
+      - "8500:8500"
+  registrator:
+    image: gliderlabs/registrator:latest
+    command: -internal consul://localhost:8500
+    container_name: 'registrator'
+    network_mode: "host"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
