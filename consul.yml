@@ -6,10 +6,18 @@ services:
     container_name: 'consul'
     ports:
       - "8500:8500"
+    environment:
+      SERVICE_8500_NAME: 'consul-admin_infra'
+      SERVICE_53_IGNORE: 'yes'
+      SERVICE_8300_IGNORE: 'yes'
+      SERVICE_8301_IGNORE: 'yes'
+      SERVICE_8302_IGNORE: 'yes'
+      SERVICE_8400_IGNORE: 'yes'
   registrator:
     image: gliderlabs/registrator:latest
-    command: -internal consul://localhost:8500
+    command: -ip localhost consul://consul:8500
     container_name: 'registrator'
-    network_mode: "host"
+    links:
+      - "consul"
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
