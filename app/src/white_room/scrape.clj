@@ -4,29 +4,29 @@
 (defn url [url]
   (java.net.URL. url))
 
-(defn- resolve-selector [selector]
+(defn- load-selector [selector]
   (binding [*ns* (find-ns 'net.cgrand.enlive-html)]
     (load-string selector)))
 
 (defn node-selector [resource selector]
-  (map html/text (html/select (html/html-resource resource) (resolve-selector selector))))
+  (map html/text (html/select (html/html-resource resource) (load-selector selector))))
 
 (defn zip [resource name-selector status-selector]
   (let [name (node-selector resource name-selector)
         status (node-selector resource status-selector)]
     (->>
       (map vector name status)
-      (map (fn [item] (zipmap [:name :status] item))))))
+      (map #(zipmap [:name :status] %)))))
 
 
 ;; Sample Data
 
 (def avoriaz-piste-url "http://www.skiplan.com/bulletin/bulletin.php?station=avoriaz&region=alpes&pays=france&lang=en")
-(def avoriaz-piste-name-selector "[:li.piste [:span (html/nth-child 3)]]")
+(def avoriaz-piste-name-selector "[:li.piste [:span (nth-child 3)]]")
 (def avoriaz-piste-status-selector "[:li.piste #{:div.etat :div.ferme}]")
 
 (def avoriaz-lifts-url "http://www.skiplan.com/bulletin/bulletin.php?station=avoriaz&region=alpes&pays=france&lang=en")
-(def avoriaz-lifts-name-selector "[:li.rm (html/nth-child 3)]")
+(def avoriaz-lifts-name-selector "[:li.rm (nth-child 3)]")
 (def avoriaz-lifts-status-selector "[:li.rm #{:div.etat :div.ferme}]")
 
 (defn avoriaz-pistes []

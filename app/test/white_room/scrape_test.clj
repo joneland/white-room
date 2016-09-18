@@ -1,15 +1,12 @@
 (ns white-room.scrape-test
   (:use clojure.test
-        net.cgrand.enlive-html
-        white-room.scrape))
+   :require [white-room.scrape :as scrape :refer [zip]]
+            [net.cgrand.enlive-html :as html :refer [html-snippet]]))
 
-(defn- to-resource [resource]
-  (java.io.StringReader. resource))
+(deftest testing-zip
 
-(deftest zips-name-and-status
-
-  (testing "returns contents of all matching nodes"
-    (let [html-sample (str
+  (testing "zips name and status with contents of matching selector"
+    (let [html-sample (html/html-snippet
                         "<html>
                           <body>
                             <ul>
@@ -26,7 +23,8 @@
                             </ul>
                           </body>
                         </html")]
-    (is (= ["CLOSED" "OPEN"]
-          (node-selector  (to-resource html-sample) "[:li.rm #{:div.etat :div.ferme}]")))
-    (is (= ["TPH PRODAINS 3S" "TD6 GRANDES COMBES"]
-          (node-selector (to-resource html-sample) "[:li.rm (nth-child 3)]"))))))
+      (is (= [
+              {:name "TPH PRODAINS 3S" :status "CLOSED"}
+              {:name "TD6 GRANDES COMBES" :status "OPEN"}
+             ]
+            (scrape/zip html-sample "[:li.rm (nth-child 3)]" "[:li.rm #{:div.etat :div.ferme}]"))))))
