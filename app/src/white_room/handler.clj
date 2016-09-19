@@ -11,16 +11,12 @@
   (zip (url uri) name-selector status-selector))
 
 (defroutes app-routes
-  (GET "/try" {params :params} []
-    (let [uri (get params :url)
-          name-selector (get params :name-selector)
-          status-selector (get params :status-selector)
-          result  (try-selector uri name-selector status-selector)]
-      (response {:result result})))
+  (GET "/try" {params :params}
+    (response {:result (try-selector (params :uri) (params :name-selector) (params :status-selector))}))
   (route/not-found
     (response {:message "Resource not found!"})))
 
-(defn wrap-log-request [handler]
+(defn- wrap-log-request [handler]
   (fn [req]
     (println req)
     (handler req)))

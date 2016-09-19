@@ -13,8 +13,8 @@
       (is (= "application/json; charset=utf-8" (get-in response [:headers "Content-Type"])))))
 
   (testing "calls try-selector using query parameters"
-    (stubbing [try-selector "stubbed response"]
-      (let [response (app (request :get "/try?url=1&name-selector=2&status-selector=3"))]
+    (stubbing [try-selector "[{:name \"Lift 1\" :status \"OPEN\"}]"]
+      (let [response (app (request :get "/try?uri=1&name-selector=2&status-selector=3"))]
         (is (= 200 (:status response)))
         (is (= "application/json; charset=utf-8" (get-in response [:headers "Content-Type"])))
         (verify-called-once-with-args try-selector "1" "2" "3")))))
