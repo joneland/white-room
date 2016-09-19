@@ -4,14 +4,16 @@
             [compojure.route :as route]
             [compojure.handler :refer :all]
             [ring.middleware.json :refer :all]
-            [ring.util.response :refer [response]]
+            [ring.util.response :refer [resource-response response]]
             [white-room.scrape :refer [zip url]]))
 
 (defn try-selector [uri name-selector status-selector]
   (zip (url uri) name-selector status-selector))
 
 (defroutes app-routes
-  (GET "/try" {params :params}
+  (GET "/try" []
+    (resource-response "try.html" {:root "public"}))
+  (GET "/try-selector" {params :params}
     (response {:result (try-selector (params :uri) (params :name-selector) (params :status-selector))}))
   (route/not-found
     (response {:message "Resource not found!"})))
