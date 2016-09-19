@@ -8,7 +8,7 @@
   (binding [*ns* (find-ns 'net.cgrand.enlive-html)]
     (load-string selector)))
 
-(defn node-selector [resource selector]
+(defn- node-selector [resource selector]
   (map html/text (html/select (html/html-resource resource) (load-selector selector))))
 
 (defn zip [resource name-selector status-selector]
@@ -38,3 +38,6 @@
   (->
     (url avoriaz-lifts-url)
     (zip avoriaz-lifts-name-selector avoriaz-lifts-status-selector)))
+
+;; Sample uri with query string
+;; http://localhost:4000/try?url=http://www.skiplan.com/bulletin/bulletin.php?station=avoriaz%26region=alpes%26pays=france%26lang=en&name-selector=[:li.piste%20[:span%20(nth-child%203)]]&status-selector=[:li.piste%20%23{:div.etat%20:div.ferme}]

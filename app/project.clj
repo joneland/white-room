@@ -20,6 +20,7 @@
     {:dev
       {:dependencies [[javax.servlet/servlet-api "2.5"]
                       [ring/ring-mock "0.3.0"]
+                      [org.clojars.runa/conjure "2.1.3"]
                       [clj-http "2.2.0"]]}}
 
   :test-selectors {:default (complement :behaviour)
