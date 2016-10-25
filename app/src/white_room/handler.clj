@@ -4,11 +4,15 @@
             [compojure.route :as route]
             [compojure.handler :refer :all]
             [ring.middleware.json :refer :all]
+            [ring.util.codec :refer :all]
             [ring.util.response :refer [resource-response response]]
-            [white-room.scrape :refer [zip url]]))
+            [white-room.scrape :refer [status url]]))
 
-(defn try-selector [uri name-selector status-selector]
-  (zip (url uri) name-selector status-selector))
+(defn try-selector [encoded-uri encoded-name-selector encoded-status-selector]
+  (let [uri             (url-decode encoded-uri)
+        name-selector   (form-decode encoded-name-selector)
+        status-selector (form-decode encoded-status-selector)]
+    (status (url uri) name-selector status-selector)))
 
 (defroutes app-routes
   (GET "/try" []

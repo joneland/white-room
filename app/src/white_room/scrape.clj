@@ -11,7 +11,7 @@
 (defn- node-selector [resource selector]
   (map html/text (html/select (html/html-resource resource) (load-selector selector))))
 
-(defn zip [resource name-selector status-selector]
+(defn status [resource name-selector status-selector]
   (let [name (node-selector resource name-selector)
         status (node-selector resource status-selector)]
     (->>
@@ -32,12 +32,15 @@
 (defn avoriaz-pistes []
   (->
     (url avoriaz-piste-url)
-    (zip avoriaz-piste-name-selector avoriaz-piste-status-selector)))
+    (status avoriaz-piste-name-selector avoriaz-piste-status-selector)))
 
 (defn avoriaz-lifts []
   (->
     (url avoriaz-lifts-url)
-    (zip avoriaz-lifts-name-selector avoriaz-lifts-status-selector)))
+    (status avoriaz-lifts-name-selector avoriaz-lifts-status-selector)))
 
 ;; Sample uri with query string
 ;; http://localhost:4000/try?uri=http://www.skiplan.com/bulletin/bulletin.php?station=avoriaz%26region=alpes%26pays=france%26lang=en&name-selector=[:li.piste%20[:span%20(nth-child%203)]]&status-selector=[:li.piste%20%23{:div.etat%20:div.ferme}]
+;; http://www.skiplan.com/bulletin/bulletin.php?station=avoriaz&region=alpes&pays=france&lang=en
+;; [:li.piste [:span (nth-child 3)]]
+;; [:li.piste #{:div.etat :div.ferme}]

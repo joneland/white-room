@@ -2,6 +2,7 @@
   (:use clojure.test
         ring.mock.request
         conjure.core
+        shrubbery.core
         white-room.handler
         white-room.scrape))
 
